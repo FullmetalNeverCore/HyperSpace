@@ -1,8 +1,9 @@
 import pygame as pg 
+from pygame import mixer
 import random 
 import math 
 res = w,h = 1600,900
-n_star = 4000
+n_star = 6000
 vec,vec2 = pg.math.Vector2,pg.math.Vector3 
 center = vec(w//2,h//2)
 clrs = 'white'.split()
@@ -15,8 +16,8 @@ class SR:
         self.vel = random.uniform(0.05,0.25)
         self.color = random.choice(clrs)
         self.screen_pos = vec(0,0)
-        self.size = 3 
-    def get_pos(self,scale_pos=15): 
+        self.size = 1
+    def get_pos(self,scale_pos=8): 
         ang = random.uniform(0,2*math.pi)
         rad = random.randrange(h//scale_pos,h)*scale_pos
         x = rad*math.sin(ang)
@@ -32,8 +33,6 @@ class SR:
         self.screen_pos += m_pos 
     def draw(self):
         pg.draw.rect(self.screen,self.color,(*self.screen_pos,self.size,self.size))
-
-
 class SRfield: 
     def __init__(self,app): 
         self.sr = [SR(app) for x in range(n_star)]
@@ -50,6 +49,10 @@ class App:
         self.clock = pg.time.Clock()
         self.srf = SRfield(self) 
     def run(self): 
+        pg.display.set_caption('HyperSpace')
+        pg.mixer.init()
+        try:pg.mixer.Sound('hyperscape.mp3').play()
+        except Exception as e:print(e);pass
         while True: 
             #self.screen.fill('black')
             self.screen.blit(self.alph_sur,(0,0)) 
