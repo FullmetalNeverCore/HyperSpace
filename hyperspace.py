@@ -5,7 +5,7 @@ res = w,h = 1600,900
 n_star = 4000
 vec,vec2 = pg.math.Vector2,pg.math.Vector3 
 center = vec(w//2,h//2)
-clrs = 'blue magenta purple cyan'.split()
+clrs = 'white'.split()
 z_dis = 40 
 alph=50
 class SR:
