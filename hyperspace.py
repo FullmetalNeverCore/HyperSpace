@@ -5,20 +5,20 @@ import math
 res = w,h = 1600,900
 n_star = 6000
 vec,vec2 = pg.math.Vector2,pg.math.Vector3 
-center = vec(w//2,h//2)
+center = vec(w//4,h//4)
 clrs = 'white'.split()
 z_dis = 40 
-alph=50
+alph=10
 class SR:
     def __init__(self,app):
         self.screen = app.screen
         self.pos = self.get_pos()
-        self.vel = random.uniform(0.05,0.25)
+        self.vel = random.uniform(0.10,0.25)
         self.color = random.choice(clrs)
         self.screen_pos = vec(0,0)
         self.size = 1
-    def get_pos(self,scale_pos=8): 
-        ang = random.uniform(0,2*math.pi)
+    def get_pos(self,scale_pos=2): 
+        ang = random.uniform(0,4*math.pi)
         rad = random.randrange(h//scale_pos,h)*scale_pos
         x = rad*math.sin(ang)
         y = rad*math.cos(ang)
@@ -27,8 +27,8 @@ class SR:
         self.pos.z -= self.vel 
         self.pos = self.get_pos() if self.pos.z < 1 else self.pos 
         self.screen_pos = vec(self.pos.x,self.pos.y)/self.pos.z + center
-        self.size = (z_dis - self.pos.z)/(0.2*self.pos.z)
-        self.pos.xy = self.pos.xy.rotate(0.2)
+        self.size = (z_dis - self.pos.z)/(0.4*self.pos.z)
+        self.pos.xy = self.pos.xy.rotate(0.4)
         m_pos = center - vec(pg.mouse.get_pos())
         self.screen_pos += m_pos 
     def draw(self):
@@ -64,4 +64,5 @@ if __name__ == '__main__':
     app = App() 
     app.run()
 
+    
     
